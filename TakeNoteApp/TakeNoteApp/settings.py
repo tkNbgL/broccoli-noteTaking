@@ -25,7 +25,7 @@ SECRET_KEY = 'd+(_pas1kmpjj634tayfswo*y#if_qidce7j=@iat9&evpj082'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['10.0.2.2',]
 
 
 # Application definition
@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'takeNoteBackend',
 ]
 
 MIDDLEWARE = [
