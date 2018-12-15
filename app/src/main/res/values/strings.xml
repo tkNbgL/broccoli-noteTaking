@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">-NoteTakingApp</string>
+    <string name="take_note">take note</string>
+    <string name="take_photo">take photo</string>
+    <string name="record_voice">record voice</string>
+    <string name="subject">Subject</string>
+    <string name="note">Note</string>
+    <string name="save">Save</string>
+    <string name="take_with_camera">take with camera</string>
+    <string name="choose_from_gallery">choose from gallery</string>
+    <string name="record">Record</string>
+    <string name="play">Play</string>
+    <string name="delete">Delete</string>
+</resources>
