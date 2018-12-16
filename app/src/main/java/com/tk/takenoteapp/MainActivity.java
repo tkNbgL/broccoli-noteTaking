@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Intent intent = new Intent(this, TakePhoto.class);
             startActivity(intent);
         }else if(v.getId() == R.id.lookAtNotes){
-            Intent intent = new Intent(this, ShowNotes.class);
+            Intent intent = new Intent(this, ShowAllNotes.class);
             startActivity(intent);
         }else{
             Intent intent = new Intent(this, RecordVoice.class);

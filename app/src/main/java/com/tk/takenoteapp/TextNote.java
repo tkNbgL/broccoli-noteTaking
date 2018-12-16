@@ -24,9 +24,9 @@ public class TextNote extends AppCompatActivity implements View.OnClickListener{
     }
 
     public void onClick(View v){
-        TextMessage incomingNote = new TextMessage();
+       /* TextMessage incomingNote = new TextMessage();
         incomingNote.setSubject(subject.getText().toString());
         incomingNote.setNote(note.getText().toString());
-        System.out.println(incomingNote.toString());
+        System.out.println(incomingNote.toString());*/
     }
 }

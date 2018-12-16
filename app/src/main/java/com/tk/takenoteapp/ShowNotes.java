@@ -6,6 +6,8 @@ import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 import model.RetroTextList;
 import network.GetDataService;
 import network.RetrofitClientInstance;
@@ -21,8 +23,9 @@ public class ShowNotes extends AppCompatActivity {
         setContentView(R.layout.activity_show_notes);
 
         GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
-        Call<RetroTextList> getOneTexts = service.getOneTexts();
-        getOneTexts.enqueue(new Callback<RetroTextList>(){
+        Call<ArrayList<RetroTextList>> getOneTexts = service.getOneTexts();
+        //will be filled later for individual notes
+       /* getOneTexts.enqueue(new Callback<RetroTextList>(){
             @Override
             public void onResponse(Call<RetroTextList> call, Response<RetroTextList> response){
                 generateText(response.body());
@@ -33,7 +36,7 @@ public class ShowNotes extends AppCompatActivity {
                 // Toast.makeText(ShowNotes.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
                 Log.e(call.toString(), "In the onFailure function: " + t);
             }
-        });
+        });*/
     }
 
     private void generateText(RetroTextList textList){

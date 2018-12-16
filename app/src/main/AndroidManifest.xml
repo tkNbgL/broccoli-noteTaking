@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.tk.takenoteapp">
 
-    <!--internet permission -->
+    <!-- internet permission -->
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -22,7 +22,8 @@
         <activity android:name=".RecordVoice" />
         <activity android:name=".ShowNotes" />
         <activity android:name=".TakePhoto" />
-        <activity android:name=".TextNote"></activity>
+        <activity android:name=".TextNote" />
+        <activity android:name=".ShowAllNotes"></activity>
     </application>
 
 </manifest>

@@ -10,8 +10,8 @@ from django.http import HttpResponse, JsonResponse
 
 def textNote_byId(request):
 	if request.method == 'GET':
-		textNotes = TextNote.objects.get(pk=1)
-		serializer = TextNoteSerializer(textNotes, many=False)
+		textNotes = TextNote.objects.filter()
+		serializer = TextNoteSerializer(textNotes, many=True)
 		return JsonResponse(serializer.data, safe=False)
 
 	elif request.method == 'POST':
