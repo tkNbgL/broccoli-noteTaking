@@ -23,7 +23,13 @@
         <activity android:name=".ShowNotes" />
         <activity android:name=".TakePhoto" />
         <activity android:name=".TextNote" />
-        <activity android:name=".ShowAllNotes"></activity>
+        <activity android:name=".ShowAllNotes" />
+        <activity android:name=".WelcomePage" />
+        <activity android:name=".LoginPage" />
+        <activity android:name=".SignupPage" />
+        <activity android:name=".AfterLogMainPage" />
+        <activity android:name=".TagsPage" />
+        <activity android:name=".InboxPage"></activity>
     </application>
 
 </manifest>
