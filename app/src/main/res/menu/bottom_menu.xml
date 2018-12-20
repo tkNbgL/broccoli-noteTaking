@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/mainPage"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="mainPage"/>
+    <item
+        android:id="@+id/tags"
+        android:icon="@drawable/ic_more_horiz_black_24dp"
+        android:title="tags"/>
+    <item
+        android:id="@+id/create"
+        android:icon="@drawable/ic_create_black_24dp"
+        android:title="takeNote"/>
+    <item
+        android:id="@+id/inbox"
+        android:icon="@drawable/ic_inbox_black_24dp"
+        android:title="inbox"/>
+</menu>

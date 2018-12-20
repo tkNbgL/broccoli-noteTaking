@@ -27,7 +27,8 @@
         <activity android:name=".WelcomePage" />
         <activity android:name=".LoginPage" />
         <activity android:name=".SignupPage" />
-        <activity android:name=".AfterLogMainPage" />
+        <activity android:name=".AfterLogMainPage"
+            android:exported="true"/>
         <activity android:name=".TagsPage" />
         <activity android:name=".InboxPage"></activity>
     </application>
