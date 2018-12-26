@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void onClick(View v){
-        if(v.getId() == R.id.takeNote){
+       /* if(v.getId() == R.id.takeNote){
             Intent intent = new Intent(this, TextNote.class);
             startActivity(intent);
         }else if(v.getId() == R.id.takePhoto){
@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }else{
             Intent intent = new Intent(this, RecordVoice.class);
             startActivity(intent);
-        }
+        }*/
     }
 
 
