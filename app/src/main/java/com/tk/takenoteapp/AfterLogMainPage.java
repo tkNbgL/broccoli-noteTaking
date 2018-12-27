@@ -13,10 +13,12 @@ import android.view.MenuItem;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AfterLogMainPage extends AppCompatActivity {
+import model.TextModel;
+
+public class AfterLogMainPage extends AppCompatActivity implements ListOfAllNotesFragment.SendMessage{
 
     private BottomNavigationView bottomNavigationView;
-    private List<ListOfAllNotesFragment> fragments = new ArrayList<>(4);
+    private List<Fragment> fragments = new ArrayList<>(4);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,10 +41,10 @@ public class AfterLogMainPage extends AppCompatActivity {
                     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                         switch (item.getItemId()){
                             case R.id.mainPage:
-                                System.out.println(item.getItemId());
-                                break;
+                                switchFragment(0);
+                                return true;
                             case R.id.tags :
-
+                                switchFragment(1);
                             case R.id.create:
 
                             case R.id.inbox:
@@ -54,12 +56,21 @@ public class AfterLogMainPage extends AppCompatActivity {
     }
 
     private void buildFragmentsList(){
-        ListOfAllNotesFragment listOfAllNotesFragment = buildFragment();
+        ListOfAllNotesFragment listOfAllNotesFragment = buildFragmentListOfAllFragment();
+        TagsFragment tagsFragment = buildFragmentTagsFragment();
         fragments.add(listOfAllNotesFragment);
+        fragments.add(tagsFragment);
     }
 
-    private ListOfAllNotesFragment buildFragment(){
+    private ListOfAllNotesFragment buildFragmentListOfAllFragment(){
         ListOfAllNotesFragment fragment = new ListOfAllNotesFragment();
+        Bundle bundle = new Bundle();
+        fragment.setArguments(bundle);
+        return fragment;
+    }
+
+    private TagsFragment buildFragmentTagsFragment(){
+        TagsFragment fragment = new TagsFragment();
         Bundle bundle = new Bundle();
         fragment.setArguments(bundle);
         return fragment;
@@ -71,5 +82,9 @@ public class AfterLogMainPage extends AppCompatActivity {
                 .replace(R.id.frame_fragmentHolder, fragments.get(pos)).commit();
     }
 
+    @Override
+    public void sendArrayListOfNotes(ArrayList<TextModel> notes){
+
+    }
 
 }

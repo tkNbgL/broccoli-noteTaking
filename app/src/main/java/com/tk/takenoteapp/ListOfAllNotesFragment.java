@@ -11,6 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 import adapter.NotesAdapter;
@@ -21,7 +23,7 @@ public class ListOfAllNotesFragment extends Fragment {
     private RecyclerView recyclerView;
     private NotesAdapter notesAdapter;
     private ArrayList<TextModel> notes;
-
+    SendMessage SM;
 
     public ListOfAllNotesFragment() {
         // Required empty public constructor
@@ -46,7 +48,7 @@ public class ListOfAllNotesFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(notesAdapter);
         createListData();
-
+        SM.sendArrayListOfNotes(notes);
         return view;
     }
 
@@ -79,4 +81,18 @@ public class ListOfAllNotesFragment extends Fragment {
     }
 
 
+    public interface SendMessage {
+        void sendArrayListOfNotes(ArrayList<TextModel> notes);
+    }
+
+    @Override
+    public void onAttach(Context context){
+        super.onAttach(context);
+
+        try{
+            SM = (SendMessage) getActivity();
+        }catch (ClassCastException e){
+            throw new ClassCastException("error in retrieving data. Please try again.");
+        }
+    }
 }
