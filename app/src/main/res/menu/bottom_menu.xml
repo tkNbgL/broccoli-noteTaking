@@ -5,10 +5,6 @@
         android:icon="@drawable/ic_home_black_24dp"
         android:title="mainPage"/>
     <item
-        android:id="@+id/tags"
-        android:icon="@drawable/ic_more_horiz_black_24dp"
-        android:title="tags"/>
-    <item
         android:id="@+id/create"
         android:icon="@drawable/ic_create_black_24dp"
         android:title="takeNote"/>

@@ -10,20 +10,23 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
 import adapter.NotesAdapter;
+import adapter.RecyclerViewClickListener;
 import model.TextModel;
+import model.TextNotesList;
 
 
 public class ListOfAllNotesFragment extends Fragment {
     private RecyclerView recyclerView;
     private NotesAdapter notesAdapter;
-    private ArrayList<TextModel> notes;
-    SendMessage SM;
+    private TextNotesList notes;
+    private getDataForNotesArrayList gDataFromNotesArrayList;
 
     public ListOfAllNotesFragment() {
         // Required empty public constructor
@@ -33,9 +36,7 @@ public class ListOfAllNotesFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        notes = new ArrayList<TextModel>();
-        notesAdapter = new NotesAdapter(getActivity(), notes);
-
+        notes = gDataFromNotesArrayList.getNotesArraylistData();
     }
 
     @Override
@@ -46,53 +47,30 @@ public class ListOfAllNotesFragment extends Fragment {
 
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        RecyclerViewClickListener listener = new RecyclerViewClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                System.out.println("dededeeeeee");
+            }
+        };
+        notesAdapter = new NotesAdapter(getActivity(), notes.getNotesList(),listener);
         recyclerView.setAdapter(notesAdapter);
-        createListData();
-        SM.sendArrayListOfNotes(notes);
+        notesAdapter.notifyDataSetChanged();
         return view;
     }
 
-    public void createListData(){
-        TextModel note = new TextModel("dede", "utku", "nebi");
-        notes.add(note);
-
-        note = new TextModel("dede", "tutku", "tnebi");
-        notes.add(note);
-
-        note = new TextModel("dede", "ttutku", "ttnebi");
-        notes.add(note);
-
-        note = new TextModel("dede", "tttutku", "tttnebi");
-        notes.add(note);
-
-        note = new TextModel("adede", "autku", "anebi");
-        notes.add(note);
-
-        note = new TextModel("aadede", "aautku", "aanebi");
-        notes.add(note);
-
-        note = new TextModel("aaadede", "aaautku", "aaanebi");
-        notes.add(note);
-
-        note = new TextModel("aaadede", "aaautku", "aaanebi");
-        notes.add(note);
-
-        notesAdapter.notifyDataSetChanged();
-    }
-
-
-    public interface SendMessage {
-        void sendArrayListOfNotes(ArrayList<TextModel> notes);
+    public interface getDataForNotesArrayList {
+        public TextNotesList getNotesArraylistData();
     }
 
     @Override
     public void onAttach(Context context){
         super.onAttach(context);
-
         try{
-            SM = (SendMessage) getActivity();
+            gDataFromNotesArrayList = (getDataForNotesArrayList) context;
         }catch (ClassCastException e){
-            throw new ClassCastException("error in retrieving data. Please try again.");
+            throw new ClassCastException(context.toString() + " must implement getNotesArraylistData");
         }
     }
+
 }

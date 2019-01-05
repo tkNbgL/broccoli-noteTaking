@@ -17,17 +17,19 @@ import model.TextModel;
 public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesHolder>{
     private Context context;
     private ArrayList<TextModel> notes;
+    private RecyclerViewClickListener mListener;
 
-    public NotesAdapter(Context context, ArrayList<TextModel> notes){
+    public NotesAdapter(Context context, ArrayList<TextModel> notes, RecyclerViewClickListener listener){
         this.context = context;
         this.notes = notes;
+        mListener = listener;
     }
 
 
     @Override
     public NotesHolder onCreateViewHolder(ViewGroup parent, int ViewType){
         View view = LayoutInflater.from(context).inflate(R.layout.content_card_view,parent,false);
-        return new NotesHolder(view);
+        return new NotesHolder(view,mListener);
     }
 
     @Override
@@ -44,28 +46,26 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesHolder>
 
 
 
-    public class NotesHolder extends RecyclerView.ViewHolder {
-        private TextView txtSubject, txtTag, txtNote;
+    public class NotesHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+        private TextView txtSubject, txtNote;
+        private RecyclerViewClickListener mListener;
 
-        public NotesHolder(View itemView){
+        public NotesHolder(View itemView, RecyclerViewClickListener listener){
             super(itemView);
             txtSubject = itemView.findViewById(R.id.subjectD);
-            txtTag = itemView.findViewById(R.id.tagsD);
             txtNote = itemView.findViewById(R.id.noteD);
+            mListener = listener;
+            itemView.setOnClickListener(this);
         }
 
         public void setDetails(TextModel textModel){
             txtSubject.setText(textModel.getSubject());
-            txtTag.setText(textModel.getTags());
             txtNote.setText(textModel.getNote());
-
-            itemView.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View view){
-                    System.out.println("dede");
-                }
-            });
         }
 
+        @Override
+        public void onClick(View v) {
+            mListener.onClick(v, getAdapterPosition());
+        }
     }
 }

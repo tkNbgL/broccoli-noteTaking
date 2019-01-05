@@ -4,6 +4,7 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -13,17 +14,22 @@ import android.view.MenuItem;
 import java.util.ArrayList;
 import java.util.List;
 
+import adapter.NotesAdapter;
 import model.TextModel;
+import model.TextNotesList;
 
-public class AfterLogMainPage extends AppCompatActivity implements ListOfAllNotesFragment.SendMessage{
+public class AfterLogMainPage extends AppCompatActivity implements ListOfAllNotesFragment.getDataForNotesArrayList{
 
     private BottomNavigationView bottomNavigationView;
-    private List<Fragment> fragments = new ArrayList<>(4);
+    private List<Fragment> fragments;
+    private TextNotesList textNotesList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_after_log_main_page);
+        textNotesList = new TextNotesList();
+        fragments = new ArrayList<>(3);
         Toolbar toolbar = findViewById(R.id.toolBar);
         setSupportActionBar(toolbar);
 
@@ -34,6 +40,8 @@ public class AfterLogMainPage extends AppCompatActivity implements ListOfAllNote
         switchFragment(0);
     }
 
+
+
     public void setListenerForBotMenu(BottomNavigationView bottom){
         bottom.setOnNavigationItemSelectedListener(
                 new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -43,10 +51,9 @@ public class AfterLogMainPage extends AppCompatActivity implements ListOfAllNote
                             case R.id.mainPage:
                                 switchFragment(0);
                                 return true;
-                            case R.id.tags :
-                                switchFragment(1);
                             case R.id.create:
-
+                                switchFragment(1);
+                                return true;
                             case R.id.inbox:
                         }
                         return true;
@@ -57,9 +64,9 @@ public class AfterLogMainPage extends AppCompatActivity implements ListOfAllNote
 
     private void buildFragmentsList(){
         ListOfAllNotesFragment listOfAllNotesFragment = buildFragmentListOfAllFragment();
-        TagsFragment tagsFragment = buildFragmentTagsFragment();
+        TakeNoteFragment takeNoteDialogFragment = buildTakeNoteDialogFragment();
         fragments.add(listOfAllNotesFragment);
-        fragments.add(tagsFragment);
+        fragments.add(takeNoteDialogFragment);
     }
 
     private ListOfAllNotesFragment buildFragmentListOfAllFragment(){
@@ -69,12 +76,14 @@ public class AfterLogMainPage extends AppCompatActivity implements ListOfAllNote
         return fragment;
     }
 
-    private TagsFragment buildFragmentTagsFragment(){
-        TagsFragment fragment = new TagsFragment();
+    private TakeNoteFragment buildTakeNoteDialogFragment(){
+        TakeNoteFragment fragment = new TakeNoteFragment();
         Bundle bundle = new Bundle();
         fragment.setArguments(bundle);
         return fragment;
     }
+
+
 
     private void switchFragment(int pos){
         getSupportFragmentManager()
@@ -82,9 +91,9 @@ public class AfterLogMainPage extends AppCompatActivity implements ListOfAllNote
                 .replace(R.id.frame_fragmentHolder, fragments.get(pos)).commit();
     }
 
+
     @Override
-    public void sendArrayListOfNotes(ArrayList<TextModel> notes){
-
+    public TextNotesList getNotesArraylistData() {
+        return textNotesList;
     }
-
 }

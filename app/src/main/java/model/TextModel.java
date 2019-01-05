@@ -1,28 +1,58 @@
 package model;
 
+import java.util.ArrayList;
+
 //this class will be used to provide dummy data
 public class TextModel {
-    private String tags;
     private String subject;
     private String note;
+    private ArrayList<TextModel> notes;
 
-    public TextModel(){
+   /* public TextModel(){
+        notes = new ArrayList<TextModel>();
+        createDumpData();
+    }*/
 
-    }
-
-    public TextModel(String tags, String subject, String note){
-        this.tags = tags;
+    public TextModel(String subject, String note){
         this.subject = subject;
         this.note = note;
     }
 
-    public String getTags() {
-        return tags;
+    private void createDumpData(){
+        TextModel note = new TextModel("comp101", "loops");
+        notes.add(note);
+
+        note = new TextModel("comp101", "memory");
+        notes.add(note);
+
+        note = new TextModel("comp101", "binary system");
+        notes.add(note);
+
+        note = new TextModel("comp101", "variables");
+        notes.add(note);
+
+        note = new TextModel("comp200", "arrays");
+        notes.add(note);
+
+        note = new TextModel("comp200", "linklists");
+        notes.add(note);
+
+        note = new TextModel("comp200", "binary tree");
+        notes.add(note);
+
+        note = new TextModel("comp200", "hash");
+        notes.add(note);
     }
 
-    public void setTags(String tags) {
-        this.tags = tags;
+    public ArrayList<TextModel> getNotes() {
+        return notes;
     }
+
+    public void addNewNote(TextModel textModel) {
+        notes.add(textModel);
+    }
+
+
 
     public String getSubject() {
         return subject;
