@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -50,7 +51,13 @@ public class ListOfAllNotesFragment extends Fragment {
         RecyclerViewClickListener listener = new RecyclerViewClickListener() {
             @Override
             public void onClick(View view, int position) {
-                System.out.println("dededeeeeee");
+                TextModel aSingleNote = notes.getNote(position);
+                FragmentTransaction ft = getActivity().getSupportFragmentManager()
+                        .beginTransaction();
+                Fragment fragment = ShowNoteFragment.newInstance(aSingleNote);
+                ft.replace(R.id.frame_fragmentHolder, fragment);
+                ft.addToBackStack(null);
+                ft.commit();
             }
         };
         notesAdapter = new NotesAdapter(getActivity(), notes.getNotesList(),listener);

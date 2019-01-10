@@ -1,7 +1,12 @@
 package com.tk.takenoteapp;
 
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -10,7 +15,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.google.android.gms.plus.PlusOneButton;
+
+import java.util.Calendar;
 
 import model.TextModel;
 
@@ -22,6 +28,10 @@ public class TakeNoteFragment extends Fragment {
     private EditText addNote;
     private Button submitNote;
     private FloatingActionButton addImgButton;
+    private setNoteToNotesList sNoteToNotesList;
+    private getFragmentList gFragmentList;
+    private final int REQUEST_IMAGE_CAPTURE = 1;
+    private Bitmap imageBitmap;
 
     public TakeNoteFragment() {
         // Required empty public constructor
@@ -46,8 +56,20 @@ public class TakeNoteFragment extends Fragment {
                     return;
                 }
 
-                TextModel aNote = new TextModel(addSubject.getText().toString(), addNote.getText().toString());
+                TextModel aNote;
 
+                if(imageBitmap == null){
+                    aNote = new TextModel(addSubject.getText().toString(), addNote.getText().toString()
+                            ,Calendar.getInstance().getTime());
+                }else{
+                    aNote = new TextModel(addSubject.getText().toString(), addNote.getText().toString()
+                            ,Calendar.getInstance().getTime(),
+                            imageBitmap);
+                }
+
+                sNoteToNotesList.setNewTextNoteToList(aNote);
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.frame_fragmentHolder, gFragmentList.getFragmentListToRedirect()).commit();
             }
         });
 
@@ -55,7 +77,8 @@ public class TakeNoteFragment extends Fragment {
         addImgButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("dedededede");
+                System.out.println("dedededede");//implement camera integration
+                dispatchTakePictureIntent();
             }
         });
 
@@ -64,7 +87,43 @@ public class TakeNoteFragment extends Fragment {
     }
 
 
+    private void dispatchTakePictureIntent(){
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if(takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null){
+            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+        }
+    }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode,resultCode,data);
+        if(requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK){
+            Bundle extras = data.getExtras();
+            imageBitmap = (Bitmap) extras.get("data");
+            if(imageBitmap != null)
+                System.out.println("hell yea");
+            else
+                System.out.println("fuck off");
+        }
+    }
 
+    public interface setNoteToNotesList{
+        public void setNewTextNoteToList(TextModel newNode);
+    }
+
+    public interface getFragmentList{
+        public Fragment getFragmentListToRedirect();
+    }
+
+    @Override
+    public void onAttach(Context context){
+        super.onAttach(context);
+        try{
+            sNoteToNotesList = (setNoteToNotesList) context;
+            gFragmentList = (getFragmentList) context;
+        }catch (ClassCastException e){
+            throw new ClassCastException(context.toString() + " must implement setNewTextNoteToList");
+        }
+    }
 
 }

@@ -47,13 +47,14 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesHolder>
 
 
     public class NotesHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        private TextView txtSubject, txtNote;
+        private TextView txtSubject, txtNote, txtDate;
         private RecyclerViewClickListener mListener;
 
         public NotesHolder(View itemView, RecyclerViewClickListener listener){
             super(itemView);
             txtSubject = itemView.findViewById(R.id.subjectD);
             txtNote = itemView.findViewById(R.id.noteD);
+            txtDate = itemView.findViewById(R.id.dateD);
             mListener = listener;
             itemView.setOnClickListener(this);
         }
@@ -61,6 +62,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesHolder>
         public void setDetails(TextModel textModel){
             txtSubject.setText(textModel.getSubject());
             txtNote.setText(textModel.getNote());
+            txtDate.setText(textModel.getCurrentTime().toString());
         }
 
         @Override

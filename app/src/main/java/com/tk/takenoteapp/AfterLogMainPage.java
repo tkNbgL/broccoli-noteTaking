@@ -1,5 +1,6 @@
 package com.tk.takenoteapp;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -18,7 +19,9 @@ import adapter.NotesAdapter;
 import model.TextModel;
 import model.TextNotesList;
 
-public class AfterLogMainPage extends AppCompatActivity implements ListOfAllNotesFragment.getDataForNotesArrayList{
+public class AfterLogMainPage extends AppCompatActivity implements ListOfAllNotesFragment.getDataForNotesArrayList,
+                                                                    TakeNoteFragment.setNoteToNotesList,
+                                                                    TakeNoteFragment.getFragmentList{
 
     private BottomNavigationView bottomNavigationView;
     private List<Fragment> fragments;
@@ -95,5 +98,20 @@ public class AfterLogMainPage extends AppCompatActivity implements ListOfAllNote
     @Override
     public TextNotesList getNotesArraylistData() {
         return textNotesList;
+    }
+
+    @Override
+    public void setNewTextNoteToList(TextModel newNode) {
+        textNotesList.setNotesList(newNode);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode,resultCode,data);
+    }
+
+    @Override
+    public Fragment getFragmentListToRedirect() {
+        return fragments.get(0);
     }
 }

@@ -1,58 +1,53 @@
 package model;
 
-import java.util.ArrayList;
+
+import android.graphics.Bitmap;
+
+import java.io.Serializable;
+import java.util.Date;
 
 //this class will be used to provide dummy data
-public class TextModel {
+public class TextModel implements Serializable{
     private String subject;
     private String note;
-    private ArrayList<TextModel> notes;
+    private Date currentTime;
+    private Bitmap notesImage;
 
    /* public TextModel(){
         notes = new ArrayList<TextModel>();
         createDumpData();
     }*/
 
-    public TextModel(String subject, String note){
+    public TextModel(String subject, String note, Date currentTime){
         this.subject = subject;
         this.note = note;
+        this.currentTime = currentTime;
+        this.notesImage = null;
     }
 
-    private void createDumpData(){
-        TextModel note = new TextModel("comp101", "loops");
-        notes.add(note);
-
-        note = new TextModel("comp101", "memory");
-        notes.add(note);
-
-        note = new TextModel("comp101", "binary system");
-        notes.add(note);
-
-        note = new TextModel("comp101", "variables");
-        notes.add(note);
-
-        note = new TextModel("comp200", "arrays");
-        notes.add(note);
-
-        note = new TextModel("comp200", "linklists");
-        notes.add(note);
-
-        note = new TextModel("comp200", "binary tree");
-        notes.add(note);
-
-        note = new TextModel("comp200", "hash");
-        notes.add(note);
-    }
-
-    public ArrayList<TextModel> getNotes() {
-        return notes;
-    }
-
-    public void addNewNote(TextModel textModel) {
-        notes.add(textModel);
+    public TextModel(String subject, String note, Date currentTime, Bitmap notesImage){
+        this.subject = subject;
+        this.note = note;
+        this.currentTime = currentTime;
+        this.notesImage = notesImage;
     }
 
 
+    public Bitmap getNotesImage() {
+        return notesImage;
+    }
+
+    public void setNotesImage(Bitmap notesImage) {
+        this.notesImage = notesImage;
+    }
+
+    public Date getCurrentTime() {
+        return currentTime;
+    }
+
+    public void setCurrentTime(Date currentTime) {
+        this.currentTime = currentTime;
+    }
 
     public String getSubject() {
         return subject;
