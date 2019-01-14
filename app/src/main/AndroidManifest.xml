@@ -12,26 +12,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".AfterLogMainPage">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RecordVoice" />
         <activity android:name=".ShowNotes" />
-        <activity android:name=".TakePhoto" />
-        <activity android:name=".TextNote" />
         <activity android:name=".ShowAllNotes" />
         <activity android:name=".WelcomePage" />
         <activity android:name=".LoginPage" />
         <activity android:name=".SignupPage" />
+        <!--
         <activity
             android:name=".AfterLogMainPage"
             android:exported="true" />
-        <activity android:name=".TagsPage" />
-        <activity android:name=".InboxPage" />
+            -->
     </application>
 
 </manifest>
